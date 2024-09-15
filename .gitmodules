@@ -1,3 +1,6 @@
 [submodule "auth"]
 	path = auth
 	url = https://github.com/famer/sl-auth.git
+[submodule "profiles"]
+	path = profiles
+	url = https://github.com/famer/sl-profiles.git
