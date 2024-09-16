@@ -14,6 +14,21 @@ spec:
       labels:
         app: {{ .Values.profiles.name }}
     spec:
+      initContainers:
+        - name: migration
+          image: "{{ .Values.profiles.image.repository }}:{{ .Values.profiles.image.tag }}"
+          command: ["npx", "knex", "migrate:latest"]
+          env:
+            - name: DATABASE_HOST
+              value: {{ .Values.db.name }}
+            - name: POSTGRES_DB
+              value: sl_users
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: NODE_ENV
+              value: production
       containers:
         - name: {{ .Values.profiles.name }}
           image: "{{ .Values.profiles.image.repository }}:{{ .Values.profiles.image.tag }}"
