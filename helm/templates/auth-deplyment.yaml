@@ -20,6 +20,8 @@ spec:
           ports:
             - containerPort: {{ .Values.auth.service.port }}
           env:
+            - name: NODE_ENV
+              value: production
             - name: REDIS_HOST
               value: redis
             - name: PROFILE_URL
