@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.profiles.name }}
+  labels:
+    app: {{ .Values.profiles.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.profiles.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.profiles.name }}
+    spec:
+      containers:
+        - name: {{ .Values.profiles.name }}
+          image: "{{ .Values.profiles.image.repository }}:{{ .Values.profiles.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.profiles.service.port }}
+          env:
+            - name: DATABASE_HOST
+              value: {{ .Values.db.name }}
+            - name: POSTGRES_DB
+              value: sl_users
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
+            - name: AUTH_URL
+              value: http://{{ .Values.auth.name }}:{{ .Values.auth.service.port }}
+

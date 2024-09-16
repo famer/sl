@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: express-apps-ingress
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+    traefik.ingress.kubernetes.io/router.middlewares: default-rewrite@kubernetescrd
+
+spec:
+  rules:
+    - http:
+        paths:
+          - path: {{ .Values.auth.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.auth.name }}
+                port:
+                  number: {{ .Values.auth.service.port }}
+          - path: {{ .Values.profiles.ingress.path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.profiles.name }}
+                port:
+                  number: {{ .Values.profiles.service.port }}
+

@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.auth.name }}
+  labels:
+    app: {{ .Values.auth.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.auth.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.auth.name }}
+    spec:
+      containers:
+        - name: {{ .Values.auth.name }}
+          image: "{{ .Values.auth.image.repository }}:{{ .Values.auth.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.auth.service.port }}
+          env:
+            - name: PROFILE_URL
+              value: http://{{ .Values.profiles.name }}:{{ .Values.profiles.service.port }}
+

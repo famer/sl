@@ -1,0 +1,48 @@
+replicaCount: 1
+
+auth:
+  name: auth
+  image:
+    repository: famer/sl-auth
+    tag: "v1"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 3000
+  ingress:
+    enabled: true
+    path: /auth
+
+profiles:
+  name: profiles
+  image:
+    repository: famer/sl-profiles
+    tag: "v1"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 3000
+  ingress:
+    enabled: true
+    path: /profiles
+
+db:
+  name: db
+  image:
+    repository: postgres
+    tag: "14"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5432
+
+redis:
+  name: redis
+  image:
+    repository: redis
+    tag: "alpine"
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 6379
+

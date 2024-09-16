@@ -13,6 +13,7 @@ services:
 
   sl_auth:
     build: auth/
+    image: famer/sl-auth
     command: node src/index.js
     environment:
       - PORT=3000
@@ -22,6 +23,7 @@ services:
 
   sl_profiles:
     build: profiles/
+    image: famer/sl-profiles
     command: node src/index.js
     environment:
       - NODE_ENV=production
