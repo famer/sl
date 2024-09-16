@@ -20,6 +20,10 @@ spec:
           ports:
             - containerPort: {{ .Values.db.service.port }}
           env:
-            - name: AUTH_URL
-              value: http://{{ .Values.auth.name }}:{{ .Values.auth.service.port }}
+            - name: POSTGRES_DB
+              value: sl_users
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
 
