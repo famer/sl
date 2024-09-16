@@ -4,7 +4,7 @@ auth:
   name: auth
   image:
     repository: famer/sl-auth
-    tag: "v1"
+    tag: "latest"
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -17,7 +17,7 @@ profiles:
   name: profiles
   image:
     repository: famer/sl-profiles
-    tag: "v1"
+    tag: "latest"
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
